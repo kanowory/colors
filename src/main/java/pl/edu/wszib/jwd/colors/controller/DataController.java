@@ -1,0 +1,24 @@
+package pl.edu.wszib.jwd.colors.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import pl.edu.wszib.jwd.colors.serwis.SelectedColorService;
+@Controller
+public class DataController {
+
+    @Value("${app.title.data}")
+    private String title;
+
+    @Autowired
+    SelectedColorService selectedColorService;
+
+    @GetMapping("/data")
+    String dataPage(Model model){
+        model.addAttribute("selectedColors", selectedColorService.getAllData());
+        model.addAttribute("title", title);
+        return "data";
+    }
+}
